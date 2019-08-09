@@ -18,9 +18,9 @@ public class Factory : AssemblyFactory<IFooObject>, IFactory
 
 public class Factory : AssemblyFactory, IFactory
 {
-		public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory,
-    new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
-		{
+    public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory,
+        new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
+    {
     }
 }
 ```
@@ -31,50 +31,50 @@ Also see the example project inside solution.
 ```
 public class Factory : AssemblyFactory<IFooObject>, IFactory
 {
-    public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory)
-    {
-    }
+	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory)
+	{
+	}
     
-    public void ImplementationOne(ISomething something)
-		{
-			return implementations.Single(q => q.IsCompatible(foo));
-		}
+	public void ImplementationOne(ISomething something)
+	{
+		return implementations.Single(q => q.IsCompatible(foo));
+	}
 }
 
 public class Factory : AssemblyFactory, IFactory
 {
-		public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory,
-    new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
-		{
-    }
+	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory,
+		new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
+	{
+	}
 
-		public void ImplementationOne(ISomething something)
-		{
-			return GetImplementation<IFooObject>().Single(q => q.IsCompatible(something));
-		}
+	public void ImplementationOne(ISomething something)
+	{
+		return GetImplementation<IFooObject>().Single(q => q.IsCompatible(something));
+	}
     
-    public void ImplementationTwo(ISomething something)
-		{
-			return GetImplementation<IAnotherFooObject>().Single(q => q.IsCompatible(something));
-		}
+	public void ImplementationTwo(ISomething something)
+	{
+		return GetImplementation<IAnotherFooObject>().Single(q => q.IsCompatible(something));
+	}
 }
 
 public interface IFooObject
 {
-    bool IsCompatible(ISomething something);
+	bool IsCompatible(ISomething something);
 }
 
 // This will be created by the factory with Dependency Injection
 public class FooObjectOne : IFooObject
 {
-    private readonly ISomeDIService someDIService;
+	private readonly ISomeDIService someDIService;
 
-    public FooObjectOne(ISomeDIService someDIService)
-    {
-      this.someDIService = someDIService;
-    }
+	public FooObjectOne(ISomeDIService someDIService)
+	{
+		this.someDIService = someDIService;
+	}
 
-    public bool IsCompatible(ISomething something) => (something is SomethingOne);
+	public bool IsCompatible(ISomething something) => (something is SomethingOne);
 }
 
 // This will be created by the factory with Dependency Injection
