@@ -12,17 +12,17 @@ To enable you to create service based factories rapidly, without having to confi
 public class Factory : AssemblyFactory<IFooObject>, IFactory
 {
 	// IServiceScopeFactory is required for accessing services from the (Startup.cs) AddScoped<>,AddTransient<>
-    public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory)
-    {
-    }
+	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory)
+	{
+	}
 }
 
 public class Factory : AssemblyFactory, IFactory
 {
-    public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory,
-        new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
-    {
-    }
+	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory,
+		new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
+	{
+	}
 }
 ```
 
