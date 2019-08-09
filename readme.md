@@ -25,130 +25,62 @@ But now you can easily just give the interface you want to use and it will read 
 ```
 
 ## Usage
+Using Generic Interface
 ```c#
-public class Factory : AssemblyFactory<IFooObject>, IFactory
+public class EncoderFactory : AssemblyFactory<IFooObject>, IFactory
 {
 	// IServiceScopeFactory is required for accessing services from the (Startup.cs) AddScoped<>,AddTransient<>
+	// IServiceScopeFactory is not needed if you use classes that do not require dependency injection.
 	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory)
 	{
 	}
 	
-	public IFooObject DoSomething(ISomething something)
+	public IEncoder GetEncoder(IUser user)
 	{
-		// List<IFooObject> implementations is list of all Classes that implement IFooObject
-		return implementations.Single(i => i.IsCompatible(something));
+		// List<IEncoder> implementations is list of all Classes that implement IEncoder
+		// Will return the correct encoder for the provider user.
+		return implementations.SingleOrDefault(i => i.IsCompatible(user));
 	}
 }
+```
 
-// This a method of the IFooObject Interface.
-public bool IsCompatible(ISomething something) => (something is SpecificClassName);
-
-
-public class Factory : AssemblyFactory, IFactory
+Using Enumerable with multiple Interfaces
+```c#
+public class AuthenticationFactory : AssemblyFactory, IFactory
 {
 	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory,
-		new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
+		new Type[] { typeof(IEncoder), typeof(IAuthenticator) })
 	{
 	}
 	
-	public void DoSomething(ISomething something)
+	public IEncoder GetEncoder(IUser user)
 	{
-		GetImplementation<IFooObject>().Single(i => i.IsCompatible(something));
+		GetImplementation<IEncoder>().SingleOrDefault(i => i.IsCompatible(user));
 	}
 	
-	public void DoSomething(ISomething something)
+	public IAuthenticator GetAuthenticator(IUser user)
 	{
-		GetImplementation<IAnotherFooObject>().Single(i => i.IsCompatible(something));
+		GetImplementation<IAuthenticator>().SingleOrDefault(i => i.IsCompatible(user));
 	}
 	
 }
 ```
 
-## Example
-Also see the example project inside solution.
-
+How to implement Checking for correct IUser
 ```c#
-public class Factory : AssemblyFactory<IFooObject>, IFactory
+// This a method of the IEncoder/IAuthenticator Interface. (multiple possibilities/examples)
+public bool IsCompatible(IUser user) => user is FacebookUser;
+public bool IsCompatible(IUser user) => user is ChromeUser;
+public bool IsCompatible(IUser user) => user is WindowsUser;
+
+// Another example
+public bool IsCompatible(IUser user)
 {
-	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory)
-	{
-	}
-	
-    	// This will return the IFooObject interface with a FooObject as actual class depending on the .Single(...)
-	public IFooObject ImplementationOne(ISomething something)
-	{
-		return implementations.Single(q => q.IsCompatible(foo));
-	}
+	if(user is FacebookUser)
+		return user.Username.contains("@gmail.com")
+	return false;
 }
 
-public class Factory : AssemblyFactory, IFactory
-{
-	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory, 
-		new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
-	{
-	}
-	
-	// This will return the IFooObject interface with a FooObject as actual class depending on the .Single(...)
-	public IFooObject ImplementationOne(ISomething something)
-	{
-		return GetImplementation<IFooObject>().Single(q => q.IsCompatible(something));
-	}
-    	
-	// This will return the IFooObject interface with AnotherFooObject as actual class
-	public IFooObject ImplementationTwo(ISomething something)
-	{
-		return GetImplementation<IAnotherFooObject>().Single(q => q.IsCompatible(something));
-	}
-}
-
-public interface IFooObject
-{
-	bool IsCompatible(ISomething something);
-}
-
-public class FooObjectOne : IFooObject
-{
-	private readonly ISomeDIService someDIService;
-
-	public FooObjectOne(ISomeDIService someDIService)
-	{
-		this.someDIService = someDIService;
-	}
-
-	public bool IsCompatible(ISomething something) => (something is SomethingOne);
-}
-
-public class FooObjectTwo : IFooObject
-{
-	private readonly ISomeDIService someDIService;
-
-	public FooObjectTwo(ISomeDIService someDIService)
-	{
-		this.someDIService = someDIService;
-	}
-
-	public bool IsCompatible(ISomething something) => (something is SomethingTwo);
-}
-
-public class AnotherFooObject : IAnotherFooObject
-{
-	private readonly ISomeDIService someDIService;
-
-	public FooObjectTwo(ISomeDIService someDIService)
-	{
-		this.someDIService = someDIService;
-	}
-
-	public bool IsCompatible(ISomething something) => (something is SomethingTwo);
-}
-
-public class SomethingOne : ISomething
-{
-	public string Name { get; set; }
-}
-
-public class SomethingTwo : ISomething
-{
-	public string Name { get; set; }
-}
 ```
+## Example
+Examples are included in the solution.
