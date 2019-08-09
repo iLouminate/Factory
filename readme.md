@@ -1,7 +1,24 @@
 # Dependency Injection Factory Component
 
 ## Why
-To enable you to create service based factories rapidly, without having to configure anything outside the factory.
+To enable you to create service based factories rapidly, without having to configure every class specifically.
+
+Before you would do something like:
+```c#
+switch(type)
+{
+  typeof(A): return new A();
+  typeof(A): return new B();
+  typeof(A): return new C();
+}
+
+List<Interface> availableTypes = new List<Interface>();
+availableTypes.Add(new A());
+availableTypes.Add(new B());
+availableTypes.Add(new C());
+```
+But now you can easily just give the interface you want to use and it will read the assembly for all classes using that specific interface and will automatically this to your factory.
+
 ## Installation
 ```
 
