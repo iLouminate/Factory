@@ -28,7 +28,7 @@ public class Factory : AssemblyFactory, IFactory
 ## Example
 Also see the example project inside solution.
 
-```
+```c#
 public class Factory : AssemblyFactory<IFooObject>, IFactory
 {
 	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory)
@@ -43,8 +43,7 @@ public class Factory : AssemblyFactory<IFooObject>, IFactory
 
 public class Factory : AssemblyFactory, IFactory
 {
-	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory,
-		new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
+	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory, new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
 	{
 	}
 
@@ -78,35 +77,35 @@ public class FooObjectOne : IFooObject
 
 public class FooObjectTwo : IFooObject
 {
-    private readonly ISomeDIService someDIService;
+	private readonly ISomeDIService someDIService;
 
-    public FooObjectTwo(ISomeDIService someDIService)
-    {
-      this.someDIService = someDIService;
-    }
+	public FooObjectTwo(ISomeDIService someDIService)
+	{
+		this.someDIService = someDIService;
+	}
 
-    public bool IsCompatible(ISomething something) => (something is SomethingTwo);
+	public bool IsCompatible(ISomething something) => (something is SomethingTwo);
 }
 
 public class AnotherFooObject : IAnotherFooObject
 {
-    private readonly ISomeDIService someDIService;
+	private readonly ISomeDIService someDIService;
 
-    public FooObjectTwo(ISomeDIService someDIService)
-    {
-      this.someDIService = someDIService;
-    }
+	public FooObjectTwo(ISomeDIService someDIService)
+	{
+		this.someDIService = someDIService;
+	}
 
-    public bool IsCompatible(ISomething something) => (something is SomethingTwo);
+	public bool IsCompatible(ISomething something) => (something is SomethingTwo);
 }
 
 public class SomethingOne : ISomething
 {
-    public string Name { get; set; }
+	public string Name { get; set; }
 }
 
 public class SomethingTwo : ISomething
 {
-    public string Name { get; set; }
+	public string Name { get; set; }
 }
 ```
