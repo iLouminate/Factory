@@ -17,7 +17,7 @@ availableTypes.Add(new A());
 availableTypes.Add(new B());
 availableTypes.Add(new C());
 ```
-But now you can easily just give the interface you want to use and it will read the assembly for all classes using that specific interface and will automatically this to your factory.
+But now you can easily just give the interface you want to use and it will read the assembly for all classes using that specific interface and will automatically resolve this based on an incoming type.
 
 ## Installation
 ```
@@ -33,14 +33,16 @@ public class Factory : AssemblyFactory<IFooObject>, IFactory
 	{
 	}
 	
-	public void DoSomething()
+	public IFooObject DoSomething(ISomething something)
 	{
-		// List<IFooObject> 
-		implementations // List of classes known inside factory
-		
-		WhateverClassYouWant wecyw = implementations.Single(i => typeof(i) == typeof(WhateverClassYouWant))
+		// List<IFooObject> implementations is list of all Classes that implement IFooObject
+		return implementations.Single(i => i.IsCompatible(something));
 	}
 }
+
+// This a method of the IFooObject Interface.
+public bool IsCompatible(ISomething something) => (something is SpecificClassName);
+
 
 public class Factory : AssemblyFactory, IFactory
 {
@@ -49,16 +51,14 @@ public class Factory : AssemblyFactory, IFactory
 	{
 	}
 	
-	public void DoSomething()
+	public void DoSomething(ISomething something)
 	{
-		// List<IFooObject> 
-		GetImplementation<IFooObject>() // List of classes known inside factory
+		GetImplementation<IFooObject>().Single(i => i.IsCompatible(something));
 	}
 	
-	public void DoSomething()
+	public void DoSomething(ISomething something)
 	{
-		// List<IAnotherFooObject>
-		GetImplementation<IAnotherFooObject>() // List of classes known inside factory
+		GetImplementation<IAnotherFooObject>().Single(i => i.IsCompatible(something));
 	}
 	
 }
