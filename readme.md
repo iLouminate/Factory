@@ -43,7 +43,8 @@ public class Factory : AssemblyFactory<IFooObject>, IFactory
 
 public class Factory : AssemblyFactory, IFactory
 {
-	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory, new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
+	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory, 
+		new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
 	{
 	}
 
