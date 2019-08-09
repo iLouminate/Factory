@@ -32,6 +32,14 @@ public class Factory : AssemblyFactory<IFooObject>, IFactory
 	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory)
 	{
 	}
+	
+	public void DoSomething()
+	{
+		// List<IFooObject> 
+		implementations // List of classes known inside factory
+		
+		WhateverClassYouWant wecyw = implementations.Single(i => typeof(i) == typeof(WhateverClassYouWant))
+	}
 }
 
 public class Factory : AssemblyFactory, IFactory
@@ -40,6 +48,19 @@ public class Factory : AssemblyFactory, IFactory
 		new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
 	{
 	}
+	
+	public void DoSomething()
+	{
+		// List<IFooObject> 
+		GetImplementation<IFooObject>() // List of classes known inside factory
+	}
+	
+	public void DoSomething()
+	{
+		// List<IAnotherFooObject>
+		GetImplementation<IAnotherFooObject>() // List of classes known inside factory
+	}
+	
 }
 ```
 
@@ -52,8 +73,9 @@ public class Factory : AssemblyFactory<IFooObject>, IFactory
 	public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory)
 	{
 	}
-    
-	public void ImplementationOne(ISomething something)
+	
+    	// This will return the IFooObject interface with a FooObject as actual class depending on the .Single(...)
+	public IFooObject ImplementationOne(ISomething something)
 	{
 		return implementations.Single(q => q.IsCompatible(foo));
 	}
@@ -65,13 +87,15 @@ public class Factory : AssemblyFactory, IFactory
 		new Type[] { typeof(IFooObject), typeof(IAnotherFooObject) })
 	{
 	}
-
-	public void ImplementationOne(ISomething something)
+	
+	// This will return the IFooObject interface with a FooObject as actual class depending on the .Single(...)
+	public IFooObject ImplementationOne(ISomething something)
 	{
 		return GetImplementation<IFooObject>().Single(q => q.IsCompatible(something));
 	}
-    
-	public void ImplementationTwo(ISomething something)
+    	
+	// This will return the IFooObject interface with AnotherFooObject as actual class
+	public IFooObject ImplementationTwo(ISomething something)
 	{
 		return GetImplementation<IAnotherFooObject>().Single(q => q.IsCompatible(something));
 	}
