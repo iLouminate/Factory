@@ -64,7 +64,6 @@ public interface IFooObject
 	bool IsCompatible(ISomething something);
 }
 
-// This will be created by the factory with Dependency Injection
 public class FooObjectOne : IFooObject
 {
 	private readonly ISomeDIService someDIService;
@@ -77,7 +76,6 @@ public class FooObjectOne : IFooObject
 	public bool IsCompatible(ISomething something) => (something is SomethingOne);
 }
 
-// This will be created by the factory with Dependency Injection
 public class FooObjectTwo : IFooObject
 {
     private readonly ISomeDIService someDIService;
@@ -90,7 +88,6 @@ public class FooObjectTwo : IFooObject
     public bool IsCompatible(ISomething something) => (something is SomethingTwo);
 }
 
-// This will be created by the factory with Dependency Injection
 public class AnotherFooObject : IAnotherFooObject
 {
     private readonly ISomeDIService someDIService;
