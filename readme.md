@@ -8,8 +8,8 @@ Before you would do something like:
 switch(type)
 {
   typeof(A): return new A();
-  typeof(A): return new B();
-  typeof(A): return new C();
+  typeof(B): return new B();
+  typeof(C): return new C();
 }
 
 List<Interface> availableTypes = new List<Interface>();
