@@ -11,6 +11,7 @@ To enable you to create service based factories rapidly, without having to confi
 ```c#
 public class Factory : AssemblyFactory<IFooObject>, IFactory
 {
+	// IServiceScopeFactory is required for accessing services from the (Startup.cs) AddScoped<>,AddTransient<>
     public Factory(IServiceScopeFactory scopedFactory) : base(scopedFactory)
     {
     }
