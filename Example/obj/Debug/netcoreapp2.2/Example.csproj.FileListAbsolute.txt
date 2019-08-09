@@ -1,0 +1,6 @@
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Example\obj\Debug\netcoreapp2.2\Example.csprojAssemblyReference.cache
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Example\obj\Debug\netcoreapp2.2\Example.csproj.CoreCompileInputs.cache
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Example\obj\Debug\netcoreapp2.2\Example.RazorAssemblyInfo.cache
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Example\obj\Debug\netcoreapp2.2\Example.RazorAssemblyInfo.cs
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Example\obj\Debug\netcoreapp2.2\Example.AssemblyInfoInputs.cache
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Example\obj\Debug\netcoreapp2.2\Example.AssemblyInfo.cs

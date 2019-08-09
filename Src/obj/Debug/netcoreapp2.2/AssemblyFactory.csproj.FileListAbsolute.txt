@@ -1,0 +1,16 @@
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\AssemblyFactory\bin\Debug\netcoreapp2.2\AssemblyFactory.deps.json
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\AssemblyFactory\bin\Debug\netcoreapp2.2\AssemblyFactory.dll
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\AssemblyFactory\obj\Debug\netcoreapp2.2\AssemblyFactory.csproj.CoreCompileInputs.cache
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\AssemblyFactory\obj\Debug\netcoreapp2.2\AssemblyFactory.AssemblyInfoInputs.cache
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\AssemblyFactory\obj\Debug\netcoreapp2.2\AssemblyFactory.AssemblyInfo.cs
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\AssemblyFactory\bin\Debug\netcoreapp2.2\AssemblyFactory.pdb
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\AssemblyFactory\obj\Debug\netcoreapp2.2\AssemblyFactory.dll
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\AssemblyFactory\obj\Debug\netcoreapp2.2\AssemblyFactory.pdb
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\bin\Debug\netcoreapp2.2\AssemblyFactory.deps.json
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\bin\Debug\netcoreapp2.2\AssemblyFactory.dll
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\bin\Debug\netcoreapp2.2\AssemblyFactory.pdb
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\obj\Debug\netcoreapp2.2\AssemblyFactory.csproj.CoreCompileInputs.cache
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\obj\Debug\netcoreapp2.2\AssemblyFactory.AssemblyInfoInputs.cache
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\obj\Debug\netcoreapp2.2\AssemblyFactory.AssemblyInfo.cs
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\obj\Debug\netcoreapp2.2\AssemblyFactory.dll
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\obj\Debug\netcoreapp2.2\AssemblyFactory.pdb

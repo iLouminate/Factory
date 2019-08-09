@@ -1,0 +1,8 @@
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\bin\Debug\netcoreapp2.2\iLouminate.AssemblyFactory.deps.json
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\bin\Debug\netcoreapp2.2\iLouminate.AssemblyFactory.dll
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\bin\Debug\netcoreapp2.2\iLouminate.AssemblyFactory.pdb
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\obj\Debug\netcoreapp2.2\iLouminate.AssemblyFactory.csproj.CoreCompileInputs.cache
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\obj\Debug\netcoreapp2.2\iLouminate.AssemblyFactory.AssemblyInfoInputs.cache
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\obj\Debug\netcoreapp2.2\iLouminate.AssemblyFactory.AssemblyInfo.cs
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\obj\Debug\netcoreapp2.2\iLouminate.AssemblyFactory.dll
+C:\Users\Bryan\source\repos\GenericFactoryWithDI\Src\obj\Debug\netcoreapp2.2\iLouminate.AssemblyFactory.pdb
