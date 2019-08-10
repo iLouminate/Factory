@@ -1,8 +1,12 @@
 ﻿namespace iLouminate.AssemblyFactory.Example.UserTypes
 {
-	public class WindowsUser : IUser
+	public class WindowsUser : BaseUser
 	{
-		public string Password { get; set; }
-		public string Username { get; set; }
+		public WindowsAuthKey WindowsAuth { get; set; }
+	}
+
+	public class WindowsAuthKey
+	{
+		public string Key { get; set; }
 	}
 }

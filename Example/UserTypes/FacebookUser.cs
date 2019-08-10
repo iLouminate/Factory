@@ -1,8 +1,12 @@
 ﻿namespace iLouminate.AssemblyFactory.Example.UserTypes
 {
-	public class FacebookUser : IUser
+	public class FacebookUser : BaseUser
 	{
-		public string Password { get; set; }
-		public string Username { get; set; }
+		public FacebookAuthToken FacebookAuthToken { get; set; }
+	}
+
+	public class FacebookAuthToken
+	{
+		public string Token { get; set; }
 	}
 }

@@ -15,16 +15,22 @@ namespace iLouminate.AssemblyFactory
 			if (scopedFactory == null) throw new ArgumentNullException(nameof(scopedFactory));
 			if (!typeof(T).IsInterface) throw new AssemblyFactoryException($"Supplied GenericType in AssemblyFactory<{typeof(T)}> can only be an interface.");
 
-			var scope = scopedFactory.CreateScope();
-			var interfaceType = typeof(T);
-			var assemblyTypes = AppDomain.CurrentDomain.GetAssemblies()
-				.SelectMany(s => s.GetTypes())
-				.Where(p => interfaceType.IsAssignableFrom(p));
-			foreach (var assemblyType in assemblyTypes.Where(t => t.IsInterface == false && t.IsClass == true))
+			using (IServiceScope scope = scopedFactory.CreateScope())
 			{
-				/// Note: if more than one constructor is used, will try to resolve first in file.
-				var initializedClass = ActivatorUtilities.CreateInstance(scope.ServiceProvider, assemblyType) as T;
-				implementations.Add(initializedClass);
+				var interfaceType = typeof(T);
+				var assemblyTypes = AppDomain.CurrentDomain.GetAssemblies()
+					.SelectMany(s => s.GetTypes())
+					.Where(p => interfaceType.IsAssignableFrom(p));
+				foreach (var assemblyType in assemblyTypes.Where(t => t.IsInterface == false && t.IsClass == true))
+				{
+					/// Note: if more than one constructor is used, will try to resolve first in file.
+					/// Does not support classes where constructor has non-Dependency Injection parameters.
+					/// e.g.: 
+					/// - Foo(IService service) will work
+					/// - Foo(IService service, string name) will fail
+					var initializedClass = ActivatorUtilities.CreateInstance(scope.ServiceProvider, assemblyType) as T;
+					implementations.Add(initializedClass);
+				}
 			}
 		}
 	}

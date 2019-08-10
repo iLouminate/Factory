@@ -1,8 +1,13 @@
 ﻿namespace iLouminate.AssemblyFactory.Example.UserTypes
 {
-	public class ChromeUser : IUser
+	public class ChromeUser : BaseUser
     {
-		public string Password { get; set; }
-		public string Username { get; set; }
+		public ChromeApiKey ChromeApiKey { get; set; }
+		
+	}
+
+	public class ChromeApiKey
+	{
+		public string Key { get; set; }
 	}
 }

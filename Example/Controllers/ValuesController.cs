@@ -10,30 +10,65 @@ namespace iLouminate.AssemblyFactory.Example.Controllers
     public class ValuesController : ControllerBase
     {
 		private readonly IEncoderFactory encoderFactory;
-		private readonly IEncoderFactoryGeneric genericEncoderFactory;
+		private readonly IAuthenticatorFactory authenticatorFactory;
 
-		public ValuesController(IEncoderFactory encoderFactory, IEncoderFactoryGeneric genericEncoderFactory)
+		public ValuesController(IEncoderFactory encoderFactory, IAuthenticatorFactory authenticatorFactory)
 		{
 			this.encoderFactory = encoderFactory;
-			this.genericEncoderFactory = genericEncoderFactory;
+			this.authenticatorFactory = authenticatorFactory;
 		}
 
-		// GET api/values
+		// GET api/values/facebook
 		[HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
+		[Route("{action}")]
+		public ActionResult<IEnumerable<string>> Facebook()
+		{
 			var result = new List<string>();
 
-			IUser fbUser = new FacebookUser() { Username = "Test@fb.com", Password = "test123" };
-			IUser gglUser = new ChromeUser() { Username = "Test@chrome.com", Password = "test123" };
-			IUser winUser = new WindowsUser() { Username = "Test@win.com", Password = "test123" };
+			IUser fbUser = new FacebookUser() { Username = "Test@fb.com", Password = "test123", FacebookAuthToken = new FacebookAuthToken { Token = "facebook" } };
 
-			result.Add(genericEncoderFactory.GetEncoder(fbUser).EncodePassword(fbUser.Password));
-			result.Add(genericEncoderFactory.GetEncoder(gglUser).EncodePassword(gglUser.Password));
-			result.Add(genericEncoderFactory.GetEncoder(winUser).EncodePassword(winUser.Password));
-			var a = encoderFactory.GetEncoder(fbUser);
+			result.Add(encoderFactory.GetEncoder(fbUser).EncodePassword(fbUser.Password));
+			if (authenticatorFactory.GetAuthenticator(fbUser).Authenticate(fbUser))
+				result.Add("Authenticated!");
+			else
+				result.Add("Not Authenticated!");
+			return result;
+		}
+
+		// GET api/values/chrome
+		[HttpGet]
+		[Route("{action}")]
+		public ActionResult<IEnumerable<string>> Chrome()
+		{
+			var result = new List<string>();
+			
+			IUser gglUser = new ChromeUser() { Username = "Test@chrome.com", Password = "test123", ChromeApiKey = new ChromeApiKey { Key = "chrome" } };
+			
+			result.Add(encoderFactory.GetEncoder(gglUser).EncodePassword(gglUser.Password));
+			if (authenticatorFactory.GetAuthenticator(gglUser).Authenticate(gglUser))
+				result.Add("Authenticated!");
+			else
+				result.Add("Not Authenticated!");
 
 			return result;
 		}
-    }
+
+		// GET api/values/windows
+		[HttpGet]
+		[Route("{action}")]
+		public ActionResult<IEnumerable<string>> Windows()
+		{
+			var result = new List<string>();
+			
+			IUser winUser = new WindowsUser() { Username = "Test@win.com", Password = "test123", WindowsAuth = new WindowsAuthKey { Key = "windows" } };
+			
+			result.Add(authenticatorFactory.GetEncoder(winUser).EncodePassword(winUser.Password));
+			if (authenticatorFactory.GetAuthenticator(winUser).Authenticate(winUser))
+				result.Add("Authenticated!");
+			else
+				result.Add("Not Authenticated!");
+
+			return result;
+		}
+	}
 }

@@ -1,4 +1,5 @@
 ﻿using iLouminate.AssemblyFactory.Example.Factory;
+using iLouminate.AssemblyFactory.Example.Services.Authenticators;
 using iLouminate.AssemblyFactory.Example.Services.Encoders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,9 +22,12 @@ namespace iLouminate.AssemblyFactory.Example
         public void ConfigureServices(IServiceCollection services)
         {
 			services.AddSingleton<IEncoderFactory, EncoderFactory>();
-			services.AddSingleton<IEncoderFactoryGeneric, EncoderFactoryGeneric>();
-			
+			services.AddSingleton<IAuthenticatorFactory, AuthenticatorFactory>();
+
 			// Added for test purposes showcasing Scoped & Transient values.
+			services.AddScoped<IWindowsAuthenticatorService, WindowsAuthenticatorService>();
+			services.AddScoped<IFacebookAuthenticatorService, FacebookAuthenticatorService>();
+			services.AddScoped<IChromeAuthenticatorService, ChromeAuthenticatorService>();
 			services.AddScoped<ISha256Service, Sha256Service>();
 			services.AddTransient<IMd5Service, Md5Service>();
 

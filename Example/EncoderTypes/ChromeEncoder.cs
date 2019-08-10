@@ -12,7 +12,7 @@ namespace iLouminate.AssemblyFactory.Example.EncoderTypes
 			this.shaService = shaService;
 		}
 
-		public bool IsUserCompatible(IUser user) => (user is ChromeUser);
+		public bool IsCompatible(IUser user) => user is ChromeUser;
 
 		public string EncodePassword(string password)
 		{

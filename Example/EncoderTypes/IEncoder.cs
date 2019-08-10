@@ -4,7 +4,7 @@ namespace iLouminate.AssemblyFactory.Example.EncoderTypes
 {
 	public interface IEncoder
     {
-		bool IsUserCompatible(IUser user);
+		bool IsCompatible(IUser user);
 		string EncodePassword(string user);
 	}
 }

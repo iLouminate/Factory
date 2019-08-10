@@ -29,24 +29,25 @@ namespace iLouminate.AssemblyFactory
 		{
 			if (scopedFactory == null) throw new ArgumentNullException(nameof(scopedFactory));
 			if (types == null) throw new ArgumentNullException(nameof(types));
-			if (types.Any(q => !q.IsInterface)) throw new AssemblyFactoryException("Can only expect interfaces");
-			
-			var scope = scopedFactory.CreateScope();
-			foreach (var type in types.ToList())
-			{
-				var implementationList = new List<object>();
-				var assemblyTypes = AppDomain.CurrentDomain.GetAssemblies()
-					.SelectMany(s => s.GetTypes())
-					.Where(p => type.IsAssignableFrom(p));
-				foreach (var assemblyType in assemblyTypes.Where(t => t.IsInterface == false && t.IsClass == true))
-				{
-					/// Note: if more than one constructor is used, will try to resolve first in file.
-					var initializedClass = ActivatorUtilities.CreateInstance(scope.ServiceProvider, assemblyType);
-					implementationList.Add(initializedClass);
-				}
-				implementations.Add(type, implementationList);
-			}
+			if (types.Any(q => !q.IsInterface)) throw new AssemblyFactoryException("Can only use types of type 'interface'.");
 
+			using (IServiceScope scope = scopedFactory.CreateScope())
+			{
+				foreach (var type in types)
+				{
+					var implementationList = new List<object>();
+					var assemblyTypes = AppDomain.CurrentDomain.GetAssemblies()
+						.SelectMany(s => s.GetTypes())
+						.Where(p => type.IsAssignableFrom(p));
+					foreach (var assemblyType in assemblyTypes.Where(t => t.IsInterface == false && t.IsClass == true))
+					{
+						/// Note: if more than one constructor is used, will try to resolve first in file.
+						var initializedClass = ActivatorUtilities.CreateInstance(scope.ServiceProvider, assemblyType);
+						implementationList.Add(initializedClass);
+					}
+					implementations.Add(type, implementationList);
+				}
+			}
 		}
 
 	}
