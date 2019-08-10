@@ -31,7 +31,14 @@ public ChromeEncoder(string name) // Error
 
 ## Installation
 ```
+-- Package Manager
+Install-Package iLouminate.AssemblyFactory -Version 1.0.0
 
+-- .NET CLI
+dotnet add package iLouminate.AssemblyFactory --version 1.0.0
+
+-- Package Reference
+<PackageReference Include="iLouminate.AssemblyFactory" Version="1.0.0" />
 ```
 
 ## Usage
