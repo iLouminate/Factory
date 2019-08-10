@@ -1,5 +1,7 @@
 # Dependency Injection Factory Component
 
+C# Version - Based on https://github.com/aeviiq/factory
+
 ## Why
 To enable you to create service based factories rapidly, without having to configure every class specifically.
 
