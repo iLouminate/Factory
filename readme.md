@@ -19,6 +19,14 @@ availableTypes.Add(new C());
 ```
 But now you can easily just give the interface you want to use and it will read the assembly for all classes using that specific interface and will automatically resolve this based on an incoming type.
 
+NOTE: Will support Interfaces with Dependency Injection and without parameters. See below:
+```c#
+public ChromeEncoder() // Succes
+public ChromeEncoder(ISha256Service shaService) // Succes
+public ChromeEncoder(ISha256Service shaService, string name) // Error
+public ChromeEncoder(string name) // Error
+```
+
 ## Installation
 ```
 
@@ -76,7 +84,7 @@ public bool IsCompatible(IUser user) => user is WindowsUser;
 // Another example
 public bool IsCompatible(IUser user)
 {
-	if(user is FacebookUser)
+	if(user is ChromeUser)
 		return user.Username.contains("@gmail.com")
 	return false;
 }
