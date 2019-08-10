@@ -19,7 +19,7 @@ availableTypes.Add(new C());
 ```
 But now you can easily just give the interface you want to use and it will read the assembly for all classes using that specific interface and will automatically resolve this based on an incoming type.
 
-NOTE: Will support Interfaces with Dependency Injection and without parameters. See below:
+NOTE: Only supports empty constructors and constructors using Dependency Injection. See below:
 ```c#
 public ChromeEncoder() // Succes
 public ChromeEncoder(ISha256Service shaService) // Succes
