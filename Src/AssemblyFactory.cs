@@ -12,7 +12,7 @@ namespace iLouminate.AssemblyFactory
 
 		protected List<T> GetImplementation<T>()
 		{
-			
+
 			if (implementations.TryGetValue(typeof(T), out List<object> implementation))
 			{
 				List<T> result = new List<T>();
@@ -47,6 +47,27 @@ namespace iLouminate.AssemblyFactory
 					}
 					implementations.Add(type, implementationList);
 				}
+			}
+		}
+
+		public AssemblyFactory(IEnumerable<Type> types)
+		{
+			if (types == null) throw new ArgumentNullException(nameof(types));
+			if (types.Any(q => !q.IsInterface)) throw new AssemblyFactoryException("Can only use types of type 'interface'.");
+
+			foreach (var type in types)
+			{
+				var implementationList = new List<object>();
+				var assemblyTypes = AppDomain.CurrentDomain.GetAssemblies()
+					.SelectMany(s => s.GetTypes())
+					.Where(p => type.IsAssignableFrom(p));
+				foreach (var assemblyType in assemblyTypes.Where(t => t.IsInterface == false && t.IsClass == true))
+				{
+					/// Note: if more than one constructor is used, will try to resolve first in file.
+					var initializedClass = Activator.CreateInstance(assemblyType);
+					implementationList.Add(initializedClass);
+				}
+				implementations.Add(type, implementationList);
 			}
 		}
 

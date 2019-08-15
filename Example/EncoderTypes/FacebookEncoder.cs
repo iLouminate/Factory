@@ -12,11 +12,17 @@ namespace iLouminate.AssemblyFactory.Example.EncoderTypes
 			this.md5Service = md5Service;
 		}
 
+		public FacebookEncoder()
+		{
+
+		}
+
 		public bool IsCompatible(IUser user) => user is FacebookUser;
 
 		public string EncodePassword(string password)
 		{
-			return $"Facebook MD5: {md5Service.Md5AsString(password)}";
+
+			return $"Facebook MD5: {md5Service?.Md5AsString(password)}";
 		}
 	}
 }

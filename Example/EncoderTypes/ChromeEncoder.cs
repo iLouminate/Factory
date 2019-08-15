@@ -12,11 +12,16 @@ namespace iLouminate.AssemblyFactory.Example.EncoderTypes
 			this.shaService = shaService;
 		}
 
+		public ChromeEncoder()
+		{
+
+		}
+
 		public bool IsCompatible(IUser user) => user is ChromeUser;
 
 		public string EncodePassword(string password)
 		{
-			return $"Chrome SHA256: {shaService.SHA256AsString(password)}";
+			return $"Chrome SHA256: {shaService?.SHA256AsString(password)}";
 		}
 	}
 }
