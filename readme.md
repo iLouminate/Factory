@@ -1,5 +1,7 @@
 # Dependency Injection Factory Component
 
+C# Version of https://github.com/aeviiq/factory
+
 ## Why
 To enable you to create service based factories rapidly, without having to configure every class specifically.
 
@@ -29,7 +31,14 @@ public ChromeEncoder(string name) // Error
 
 ## Installation
 ```
+-- Package Manager
+Install-Package iLouminate.AssemblyFactory -Version 1.0.0
 
+-- .NET CLI
+dotnet add package iLouminate.AssemblyFactory --version 1.0.0
+
+-- Package Reference
+<PackageReference Include="iLouminate.AssemblyFactory" Version="1.0.0" />
 ```
 
 ## Usage
