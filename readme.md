@@ -23,8 +23,8 @@ But now you can easily just give the interface you want to use and it will read 
 
 NOTE: Only supports empty constructors and constructors using Dependency Injection. See below:
 ```c#
-public ChromeEncoder() // Succes
-public ChromeEncoder(ISha256Service shaService) // Succes
+public ChromeEncoder() // Success
+public ChromeEncoder(ISha256Service shaService) // Success
 public ChromeEncoder(ISha256Service shaService, string name) // Error
 public ChromeEncoder(string name) // Error
 ```
