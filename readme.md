@@ -44,7 +44,7 @@ dotnet add package iLouminate.AssemblyFactory --version 1.0.1
 ## Usage
 Using Generic Interface
 ```c#
-public class EncoderFactory : AssemblyFactory<IFooObject>, IFactory
+public class EncoderFactory : AssemblyFactory<IEncoder>, IFactory
 {
 	// IServiceScopeFactory is required for accessing services from the (Startup.cs) AddScoped<>,AddTransient<>
 	// IServiceScopeFactory is not needed if you use classes that do not require dependency injection.
